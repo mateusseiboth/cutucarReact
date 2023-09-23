@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useField } from "@unform/core";
 import { styled } from "@stitches/react";
 import style from "./input.css";
+import { Box, TextField } from "@mui/material";
 
 const Small = styled("small", {
   margin: "2px 0 20px",
@@ -36,29 +37,12 @@ const InputText = styled("input", {
   },
 });
 
-const FieldSet = styled("fieldset", {
-  marginBottom: "20px",
-  border: "none",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-  justifyContent: "flex-start",
-  width: "100%",
-});
-
 export default function Input({ name, type, displayName, onChange, ...rest }) {
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const inputRef = useRef(null);
   const [format, setFormat] = React.useState(1);
   const [errorState, setErrorState] = React.useState("");
 
-  const changeFormat = (e) => {
-    if (e.type === "focus") {
-      setFormat(2);
-    } else {
-      setFormat(1);
-    }
-  };
   const onChangeForm = (e) => {
     setErrorState("");
     if (typeof onChange === "function") {
@@ -79,29 +63,25 @@ export default function Input({ name, type, displayName, onChange, ...rest }) {
   }, [fieldName, registerField]);
   if (type != "hidden")
     return (
-      <FieldSet>
-        <div className="input-wrapper">
-          <label htmlFor={fieldName}>{format === 1 ? "" : displayName}</label>
-          <InputText
-            onFocus={(e) => {
-              changeFormat(e);
-            }}
-            onBlur={(e) => {
-              changeFormat(e);
-            }}
-            onChange={(e) => {
-              onChangeForm(e);
-            }}
-            ref={inputRef}
-            defaultValue={defaultValue}
-            {...rest}
-            id={fieldName}
-            type={type || "text"}
-            placeholder={format === 1 ? displayName : ""}
-          />
-          {error && <Small>{errorState}</Small>}
-        </div>
-      </FieldSet>
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        sx={{ marginBottom: "20px" }}
+      >
+        <InputText
+          onChange={(e) => {
+            onChangeForm(e);
+          }}
+          ref={inputRef}
+          defaultValue={defaultValue}
+          {...rest}
+          id={fieldName}
+          type={type || "text"}
+          sx={{ width: "100%" }}
+        />
+        {error && <Small>{errorState}</Small>}
+      </Box>
     );
   else
     return (

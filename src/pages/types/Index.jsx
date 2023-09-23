@@ -4,7 +4,6 @@ import { Modal, Typography } from "@mui/material";
 import api from "../../services/api";
 import { Cards } from "../../components/card/card";
 import { Box } from "@mui/system";
-import { Notification } from "../../components/notification/notify";
 const SytledModal = styled(Modal)({
   display: "flex",
   alignItems: "center",
@@ -12,7 +11,7 @@ const SytledModal = styled(Modal)({
 });
 
 const Index = () => {
-  const [carros, setCarros] = useState([]);
+  const [types, setTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [type, setType] = useState("");
@@ -21,9 +20,9 @@ const Index = () => {
   useEffect(() => {
     try {
       setIsLoading(true);
-      api.get("/api/v1/car/list").then((response) => {
+      api.get("/api/v1/tipo/list").then((response) => {
         console.log(response);
-        setCarros(response.data);
+        setTypes(response.data);
       });
       setIsLoading(false);
     } catch (err) {
@@ -32,27 +31,17 @@ const Index = () => {
   }, []);
   //cria a página
   const fields = {
-    placa: "Placa",
-    cliente_nome: "Cliente",
+    preco: "Preço",
+    descr: "Descrição",
     id: "ID",
-    cliente_id: "ID Cliente",
   };
   return (
-    <>
-      <Notification
-        message={message}
-        type={type}
-        open={open}
-        isLoading={isLoading}
-      />
-
-      <Box sx={{ ml: "5px" }} position="center">
-        <Typography align="center" variant="h3" component="div">
-          Carros atualmente cadastrados
-        </Typography>
-        <Cards obj={carros} fields={fields} title="Carro Número: " />
-      </Box>
-    </>
+    <Box sx={{ ml: "5px" }} position="center">
+      <Typography align="center" variant="h3" component="div">
+        Tipos atualmente cadastrados
+      </Typography>
+      <Cards obj={types} fields={fields} title="Tipo Número: " />
+    </Box>
   );
 };
 

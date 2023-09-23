@@ -126,6 +126,38 @@ function ResponsiveAppBar({ children }) {
               >
                 Carros
               </Button>
+              <Button
+                component={RouterLink}
+                to="/clients"
+                key="clients"
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Clientes
+              </Button>
+              <Button
+                component={RouterLink}
+                to="/types"
+                key="types"
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Tipos
+              </Button>
+              <Button
+                component={RouterLink}
+                to="/parking"
+                key="parking"
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Vagas
+              </Button>
+              <Button
+                component={RouterLink}
+                to="/tickets"
+                key="tickets"
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Todos os Tickets
+              </Button>
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>

@@ -47,6 +47,26 @@ const routes = [
         path: "/cars",
         component: lazy(() => import("../pages/cars/Index")),
       },
+      {
+        exact: true,
+        path: "/clients",
+        component: lazy(() => import("../pages/clients/Index")),
+      },
+      {
+        exact: true,
+        path: "/types",
+        component: lazy(() => import("../pages/types/Index")),
+      },
+      {
+        exact: true,
+        path: "/parking",
+        component: lazy(() => import("../pages/parking/Index")),
+      },
+      {
+        exact: true,
+        path: "/tickets",
+        component: lazy(() => import("../pages/tickets/Index")),
+      },
     ],
   },
 ];
